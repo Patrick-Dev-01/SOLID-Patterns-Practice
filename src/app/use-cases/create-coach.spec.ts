@@ -1,4 +1,4 @@
-import { makeTeamFactory } from "../../../test/factories/make-team-factory";
+import { makeTeam } from "../../../test/factories/make-team-factory";
 import { InMemoryCoachRepository } from "../../../test/repositories/in-memory-coach-repository";
 import { CreateCoachUseCase } from "./create-coach";
 
@@ -12,7 +12,7 @@ describe("Create Coach", () => {
     })
 
     it('should be able create a coach', async () => {
-        const team = makeTeamFactory({});
+        const team = makeTeam({});
 
         const response = await sut.execute({
             name: 'coach test',

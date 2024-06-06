@@ -11,8 +11,9 @@
 - Typescript
 - Node JS
 - SOLID
-- Design Patterns (Repository, Factory)
+- Design Patterns (Repository and Factory)
 - MySQL
 - POSTGRESQL
 - Vitest
 - Unit Tests
+- E2E Tests

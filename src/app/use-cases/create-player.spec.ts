@@ -1,4 +1,4 @@
-import { makeTeamFactory } from "../../../test/factories/make-team-factory";
+import { makeTeam } from "../../../test/factories/make-team-factory";
 import { InMemoryPlayerRepository } from "../../../test/repositories/in-memory-player-repository";
 import { CreatePlayerUseCase } from "./create-player";
 
@@ -12,7 +12,7 @@ describe("Create Player", () => {
     })
 
     it('should be able create a player', async () => {
-        const team = makeTeamFactory({});
+        const team = makeTeam({});
 
         const response = await sut.execute({
             name: 'player test', 

@@ -1,4 +1,4 @@
-import { makePlayerFactory } from "../../../test/factories/make-player-factory";
+import { makePlayer } from "../../../test/factories/make-player-factory";
 import { InMemoryPlayerRepository } from "../../../test/repositories/in-memory-player-repository";
 import { DeletePlayerUseCase } from "./delete-player";
 
@@ -12,7 +12,7 @@ describe('Delete Player', () => {
     })
 
     it('should be able to delete a player', async () => {
-        await inMemoryPlayerRepository.create(makePlayerFactory({ id: '1' }));
+        await inMemoryPlayerRepository.create(makePlayer({ id: '1' }));
         
         await sut.execute({ id: '1' });
 

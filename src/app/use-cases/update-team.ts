@@ -17,7 +17,7 @@ export class UpdateTeamUseCase{
     ){}
 
     async execute({ id, name }: UpdateTeamUseCaseRequest): Promise<UpdateTeamUseCaseResponse>{
-        const team = await this.teamRepository.findById(id)
+        const team = await this.teamRepository.findById(id);
 
         if(!team){
             throw new ResourceNotFoundError();  

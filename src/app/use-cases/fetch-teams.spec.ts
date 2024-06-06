@@ -1,4 +1,4 @@
-import { makeTeamFactory } from "../../../test/factories/make-team-factory";
+import { makeTeam } from "../../../test/factories/make-team-factory";
 import { InMemoryTeamRepository } from "../../../test/repositories/in-memory-team-repository";
 import { FetchTeamsUseCase } from "./fetch-teams";
 
@@ -12,9 +12,9 @@ describe('Fetch Teams', () => {
     })
 
     it('should be able to fetch all teams', async () => {
-        inMemoryTeamRepository.create(makeTeamFactory({ id: '1', name: 'team 1' }));
-        inMemoryTeamRepository.create(makeTeamFactory({ id: '2', name: 'team 2' }));
-        inMemoryTeamRepository.create(makeTeamFactory({ id: '3', name: 'team 3' }));
+        inMemoryTeamRepository.create(makeTeam({ id: '1', name: 'team 1' }));
+        inMemoryTeamRepository.create(makeTeam({ id: '2', name: 'team 2' }));
+        inMemoryTeamRepository.create(makeTeam({ id: '3', name: 'team 3' }));
 
         const response = await sut.execute();
 

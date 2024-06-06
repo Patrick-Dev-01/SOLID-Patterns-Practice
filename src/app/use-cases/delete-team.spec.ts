@@ -1,4 +1,4 @@
-import { makeTeamFactory } from "../../../test/factories/make-team-factory";
+import { makeTeam } from "../../../test/factories/make-team-factory";
 import { InMemoryTeamRepository } from "../../../test/repositories/in-memory-team-repository";
 import { DeleteTeamUseCase } from "./delete-team";
 
@@ -12,7 +12,7 @@ describe('Delete Team', () => {
     })
 
     it('should be able to delete team', async () => {
-        const team = makeTeamFactory({ id: '1', name: 'team 1' });
+        const team = makeTeam({ id: '1', name: 'team 1' });
 
         inMemoryTeamRepository.create(team);
 

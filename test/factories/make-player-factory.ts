@@ -1,5 +1,6 @@
 import { faker } from "@faker-js/faker";
 import { Player } from "../../src/core/@types/player-types";
+import { MySQLService } from "../../src/infra/database/mysql/mysql";
 
 enum Position {
     goleiro = "goleiro",
@@ -9,9 +10,7 @@ enum Position {
     atacante = "atacante",
 }
 
-type PlayerFactory = Partial<Player>;
-
-export function makePlayerFactory({ id, name, position, shirt_number, starter, team_id }: PlayerFactory){
+export function makePlayer({ id, name, position, shirt_number, starter, team_id }: Partial<Player>){
     const player: Player = {
         id: id ?? faker.string.uuid(),
         name: name ?? faker.person.fullName(),
@@ -22,4 +21,16 @@ export function makePlayerFactory({ id, name, position, shirt_number, starter, t
     }
     
     return player;
+}
+
+export class PlayerFactory{
+    private mysql = new MySQLService();
+
+    async makeMySQLPlayer(data: Partial<Player>): Promise<Player>{
+        const player = makePlayer(data);
+
+        // await this.mysql.query(`INSERT INTO teams (id, name) VALUES ('${player.id}', '${player.name}')`);
+
+        return player;
+    }
 }

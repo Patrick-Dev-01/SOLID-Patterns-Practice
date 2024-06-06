@@ -1,4 +1,4 @@
-import { makeTeamFactory } from "../../../test/factories/make-team-factory";
+import { makeTeam } from "../../../test/factories/make-team-factory";
 import { InMemoryTeamRepository } from "../../../test/repositories/in-memory-team-repository";
 import { GetTeamByIdUseCase } from "./get-team-by-id";
 
@@ -12,7 +12,7 @@ describe('Get Team by Id', () => {
     })
 
     it('should be able to get a team by id', async () => {
-        const team = makeTeamFactory({ id: '1', name: 'team 1' });
+        const team = makeTeam({ id: '1', name: 'team 1' });
 
         inMemoryTeamRepository.create(team);
 

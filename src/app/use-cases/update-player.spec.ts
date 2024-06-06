@@ -1,4 +1,4 @@
-import { makePlayerFactory } from "../../../test/factories/make-player-factory";
+import { makePlayer } from "../../../test/factories/make-player-factory";
 import { InMemoryPlayerRepository } from "../../../test/repositories/in-memory-player-repository";
 import { UpdatePlayerUseCase } from "./update-player";
 
@@ -12,7 +12,7 @@ describe('Update Player', () => {
     })
 
     it('should be able to update player', async () => {
-        const player = await inMemoryPlayerRepository.create(makePlayerFactory({ id: '1' }));
+        const player = await inMemoryPlayerRepository.create(makePlayer({ id: '1' }));
         
         const response = await sut.execute({
             id: player.id,
