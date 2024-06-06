@@ -1,4 +1,4 @@
-import { Coach } from "../../src/core/@types/coach-types";
+import { Coach } from "../../src/core/types/coach-types";
 import { CoachRepository } from "../../src/core/repositories/coach-repository";
 
 export class InMemoryCoachRepository implements CoachRepository{

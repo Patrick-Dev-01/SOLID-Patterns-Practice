@@ -1,4 +1,4 @@
-import { Player } from "../../src/core/@types/player-types";
+import { Player } from "../../src/core/types/player-types";
 import { PlayerRepository } from "../../src/core/repositories/player-repository";
 
 export class InMemoryPlayerRepository implements PlayerRepository{
@@ -8,6 +8,10 @@ export class InMemoryPlayerRepository implements PlayerRepository{
         const players = this.items.filter(item => item.team_id === id);
 
         return players;
+    }
+
+    async findMany(){
+        return this.items;
     }
 
     async findById(id: string): Promise<Player | null> {

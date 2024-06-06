@@ -1,4 +1,4 @@
-import { Player } from "../../core/@types/player-types";
+import { Player } from "../../core/types/player-types";
 import { PlayerRepository } from "../../core/repositories/player-repository";
 import { ResourceNotFoundError } from "../errors/resource-not-found-error";
 

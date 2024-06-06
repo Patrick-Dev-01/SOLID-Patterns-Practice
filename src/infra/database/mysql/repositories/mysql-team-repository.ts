@@ -1,4 +1,4 @@
-import { Team } from "../../../../core/@types/team-types";
+import { Team } from "../../../../core/types/team-types";
 import { TeamRepository } from "../../../../core/repositories/team-repository";
 import { MySQLService } from "../mysql";
 
@@ -13,8 +13,10 @@ export class MySQLTeamRepository implements TeamRepository{
         return team;
     }
 
-    async fetchAll(): Promise<Team[]> {
-        throw new Error("Method not implemented.");
+    async findMany(): Promise<Team[]> {
+        const teams = await this.mysql.query("SELECT *FROM teams") as Team[];
+        
+        return teams;
     }
 
     async create(team: Team): Promise<Team> {
@@ -30,6 +32,6 @@ export class MySQLTeamRepository implements TeamRepository{
     }
 
     async delete(team: Team): Promise<void> {
-        throw new Error("Method not implemented.");
+        await this.mysql.query(`DELETE FROM teams WHERE id = '${team.id}'`);
     }
 }

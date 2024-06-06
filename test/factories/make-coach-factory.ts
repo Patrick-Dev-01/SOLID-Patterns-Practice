@@ -1,5 +1,5 @@
 import { faker } from "@faker-js/faker";
-import { Coach } from "../../src/core/@types/coach-types";
+import { Coach } from "../../src/core/types/coach-types";
 
 type CoachFactory = Partial<Coach>;
 

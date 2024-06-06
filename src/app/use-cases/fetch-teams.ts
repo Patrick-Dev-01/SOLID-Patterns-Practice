@@ -1,4 +1,4 @@
-import { Team } from "../../core/@types/team-types";
+import { Team } from "../../core/types/team-types";
 import { TeamRepository } from "../../core/repositories/team-repository";
 
 interface FetchTeamsUseCaseResponse{
@@ -11,7 +11,7 @@ export class FetchTeamsUseCase{
     ){}
 
     async execute(): Promise<FetchTeamsUseCaseResponse>{
-        const teams = await this.teamRepository.fetchAll();
+        const teams = await this.teamRepository.findMany();
 
         return { teams }
     }

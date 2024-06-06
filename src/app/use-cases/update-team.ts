@@ -1,4 +1,4 @@
-import { Team } from "../../core/@types/team-types";
+import { Team } from "../../core/types/team-types";
 import { TeamRepository } from "../../core/repositories/team-repository";
 import { ResourceNotFoundError } from "../errors/resource-not-found-error";
 

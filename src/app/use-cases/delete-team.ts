@@ -3,7 +3,6 @@ import { ResourceNotFoundError } from "../errors/resource-not-found-error";
 
 interface DeleteTeamUseCaseRequest{
     id: string;
-    name: string;
 }
 
 export class DeleteTeamUseCase{

@@ -1,4 +1,4 @@
-import { Coach } from "../../core/@types/coach-types";
+import { Coach } from "../../core/types/coach-types";
 import { CoachRepository } from "../../core/repositories/coach-repository";
 
 interface FetchCoachesUseCaseResponse{

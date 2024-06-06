@@ -1,5 +1,5 @@
 import { faker } from '@faker-js/faker'; 
-import { Team } from '../../src/core/@types/team-types';
+import { Team } from '../../src/core/types/team-types';
 import { MySQLService } from '../../src/infra/database/mysql/mysql';
 
 export function makeTeam({ id, name }: Partial<Team>){

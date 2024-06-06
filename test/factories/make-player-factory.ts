@@ -1,5 +1,5 @@
 import { faker } from "@faker-js/faker";
-import { Player } from "../../src/core/@types/player-types";
+import { Player } from "../../src/core/types/player-types";
 import { MySQLService } from "../../src/infra/database/mysql/mysql";
 
 enum Position {
@@ -29,8 +29,16 @@ export class PlayerFactory{
     async makeMySQLPlayer(data: Partial<Player>): Promise<Player>{
         const player = makePlayer(data);
 
-        // await this.mysql.query(`INSERT INTO teams (id, name) VALUES ('${player.id}', '${player.name}')`);
+        await this.mysql.query(`
+            INSERT INTO players (id, name, shirt_number, position, starter, team_id ) 
+            VALUES ('${player.id}', '${player.name}', ${player.shirt_number}, '${player.position}', 
+            ${player.starter}, '${player.team_id}')`
+        );
 
         return player;
+    }
+
+    async flushPlayers(){
+        await this.mysql.query('DELETE FROM players');
     }
 }

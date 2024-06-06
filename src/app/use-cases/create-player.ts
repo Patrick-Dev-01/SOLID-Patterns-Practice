@@ -1,4 +1,4 @@
-import { Player } from "../../core/@types/player-types";
+import { Player } from "../../core/types/player-types";
 import { PlayerRepository } from "../../core/repositories/player-repository";
 import { randomUUID } from 'node:crypto';
 

@@ -1,4 +1,4 @@
-import { Team } from "../../src/core/@types/team-types";
+import { Team } from "../../src/core/types/team-types";
 import { TeamRepository } from "../../src/core/repositories/team-repository";
 
 export class InMemoryTeamRepository implements TeamRepository{
@@ -14,7 +14,7 @@ export class InMemoryTeamRepository implements TeamRepository{
         return team;
     }
     
-    async fetchAll(){
+    async findMany(){
         return this.items;
     }
 

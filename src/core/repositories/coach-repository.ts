@@ -1,4 +1,4 @@
-import { Coach } from "../@types/coach-types";
+import { Coach } from "../types/coach-types";
 
 export interface CoachRepository{
     findById(id: string): Promise<Coach | null>;
