@@ -25,10 +25,23 @@ import { FetchPlayersController } from '../http/controllers/fetch-players-contro
 import { DeletePlayerUseCase } from '../../app/use-cases/delete-player';
 import { DeletePlayerController } from '../http/controllers/delete-player-controller';
 
+import { CreateCoachUseCase } from '../../app/use-cases/create-coach';
+import { MySQLCoachRepository } from '../database/mysql/repositories/mysql-coach-repository';
+import { CreateCoachController } from '../http/controllers/create-coach-controller';
+import { GetCoachByIdUseCase } from '../../app/use-cases/get-coach-by-id';
+import { GetCoachByIdController } from '../http/controllers/get-coach-by-id-controller';
+import { UpdateCoachUseCase } from '../../app/use-cases/update-coach';
+import { UpdateCoachController } from '../http/controllers/update-coach-controller';
+import { DeleteCoachUseCase } from '../../app/use-cases/delete-coach';
+import { DeleteCoachController } from '../http/controllers/delete-coach-controller';
+import { FetchCoachsUseCase } from '../../app/use-cases/fetch-coachs';
+import { FetchCoachsController } from '../http/controllers/fetch-coachs-controller';
+
 const footballRoutes = express.Router();
 
 const mySQLTeamRepository = new MySQLTeamRepository();
 const mySQLPlayerRepository = new MySQLPlayerRepository();
+const mySQLCoachRepository = new MySQLCoachRepository(); 
 
 /* Teams */
 
@@ -140,6 +153,59 @@ footballRoutes.delete("/player/:id", async (request: Request, response: Response
     const deletePlayerController = new DeletePlayerController(deletePlayerUseCase);
     
     const result = await deletePlayerController.handle(id);
+
+    response.status(204).json(result);
+});
+
+/* Coaches */
+
+footballRoutes.get("/coach", async (request: Request, response: Response) => {    
+    const fetchCoachsUseCase = new FetchCoachsUseCase(mySQLPlayerRepository);
+    const fetchCoachsController = new FetchCoachsController(fetchCoachsUseCase);
+    
+    const result = await fetchCoachsController.handle();
+    
+    response.status(200).json(result);
+});
+
+footballRoutes.post("/coach", async (request: Request, response: Response) => {    
+    const createCoachUseCase = new CreateCoachUseCase(mySQLCoachRepository);
+    const createCoachController = new CreateCoachController(createCoachUseCase);
+    
+    const result = await createCoachController.handle(request.body);
+    
+    response.status(201).json(result);
+});
+
+footballRoutes.get("/coach/:id", async (request: Request, response: Response) => {
+    const { id } = request.params;
+    
+    const getCoachByIdUseCase = new GetCoachByIdUseCase(mySQLCoachRepository);
+    const getCoachByIdController = new GetCoachByIdController(getCoachByIdUseCase);
+    
+    const result = await getCoachByIdController.handle(id);
+    
+    response.status(200).json(result);
+});
+
+footballRoutes.put("/coach/:id", async (request: Request, response: Response) => {
+    const { id } = request.params;
+    
+    const updateCoachUseCase = new UpdateCoachUseCase(mySQLCoachRepository);
+    const updateCoachController = new UpdateCoachController(updateCoachUseCase);
+    
+    const result = await updateCoachController.handle(id, request.body);
+    
+    response.status(200).json(result);
+});
+
+footballRoutes.delete("/coach/:id", async (request: Request, response: Response) => {
+    const { id } = request.params;
+
+    const deleteCoachUseCase = new DeleteCoachUseCase(mySQLCoachRepository);
+    const deleteCoachController = new DeleteCoachController(deleteCoachUseCase);
+    
+    const result = await deleteCoachController.handle(id);
 
     response.status(204).json(result);
 });

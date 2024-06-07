@@ -1,4 +1,4 @@
-import { makeCoachFactory } from "../../../test/factories/make-coach-factory";
+import { makeCoach } from "../../../test/factories/make-coach-factory";
 import { InMemoryCoachRepository } from "../../../test/repositories/in-memory-coach-repository";
 import { GetCoachByIdUseCase } from "./get-coach-by-id";
 
@@ -12,7 +12,7 @@ describe('Get Coach by Id', () => {
     })
 
     it('should be able to get a Coach by id', async () => {
-        const coach = await inMemoryCoachRepository.create(makeCoachFactory({ id: '1' }))
+        const coach = await inMemoryCoachRepository.create(makeCoach({ id: '1' }))
         
         const response = await sut.execute({
             id: coach.id,

@@ -26,7 +26,7 @@ export class MySQLPlayerRepository implements PlayerRepository{
     async create(player: Player): Promise<Player> {
         await this.mysql.query(
             `INSERT INTO players (id, name, shirt_number, position, starter, team_id ) 
-            VALUES ('${player.id}', '${player.name}', ${player.shirt_number}, '${player.position}', 
+            VALUES ('${player.id}', "${player.name}", ${player.shirt_number}, '${player.position}', 
             ${player.starter}, '${player.team_id}')`
         );
 
@@ -35,7 +35,7 @@ export class MySQLPlayerRepository implements PlayerRepository{
 
     async update(player: Player): Promise<Player | null> {
         await this.mysql.query(
-            `UPDATE players SET name = '${player.name}', shirt_number = ${player.shirt_number}, position = '${player.position}',
+            `UPDATE players SET name = "${player.name}", shirt_number = ${player.shirt_number}, position = '${player.position}',
                 starter = ${player.starter}, team_id = '${player.team_id}' WHERE id = '${player.id}'`
         );
 

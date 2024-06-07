@@ -20,7 +20,7 @@ export class MySQLTeamRepository implements TeamRepository{
     }
 
     async create(team: Team): Promise<Team> {
-        await this.mysql.query(`INSERT INTO teams (id, name) VALUES ('${team.id}', '${team.name}')`);
+        await this.mysql.query(`INSERT INTO teams (id, name) VALUES ('${team.id}', "${team.name}")`);
 
         return team;
     }

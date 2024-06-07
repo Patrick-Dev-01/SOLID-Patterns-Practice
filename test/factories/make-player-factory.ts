@@ -37,8 +37,4 @@ export class PlayerFactory{
 
         return player;
     }
-
-    async flushPlayers(){
-        await this.mysql.query('DELETE FROM players');
-    }
 }
