@@ -17,3 +17,9 @@ CREATE TABLE coachs(
     name text,
     team_id text REFERENCES teams(id)   
 );
+
+-- Create a database based on a existing database
+CREATE DATABASE newdb WITH TEMPLATE originaldb OWNER dbuser;
+
+SELECT pg_terminate_backend(pg_stat_activity.pid) FROM pg_stat_activity 
+WHERE pg_stat_activity.datname = 'originaldb' AND pid <> pg_backend_pid();

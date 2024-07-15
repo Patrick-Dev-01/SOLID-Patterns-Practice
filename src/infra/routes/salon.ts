@@ -13,7 +13,20 @@ import { UpdateTeamController } from '../http/controllers/update-team-controller
 import { DeleteTeamUseCase } from '../../app/use-cases/delete-team';
 import { DeleteTeamController } from '../http/controllers/delete-team-controller';
 
+import { FetchPlayersUseCase } from '../../app/use-cases/fetch-players';
+import { FetchPlayersController } from '../http/controllers/fetch-players-controller';
+import { GetPlayerByIdUseCase } from '../../app/use-cases/get-player-by-id';
+import { GetPlayerByIdController } from '../http/controllers/get-player-by-id-controller';
+import { UpdatePlayerUseCase } from '../../app/use-cases/update-player';
+import { UpdatePlayerController } from '../http/controllers/update-player-controller';
+import { PostgresPlayerRepository } from '../database/postgres/repositories/postgres-player.repository';
+import { CreatePlayerUseCase } from '../../app/use-cases/create-player';
+import { CreatePlayerController } from '../http/controllers/create-player-controller';
+import { DeletePlayerUseCase } from '../../app/use-cases/delete-player';
+import { DeletePlayerController } from '../http/controllers/delete-player-controller';
+
 const postgresTeamRepository = new PostgresTeamRepository();
+const postgresPlayerRepository = new PostgresPlayerRepository();
 
 const salonRoutes = express.Router();
 
@@ -47,8 +60,6 @@ salonRoutes.post("/team", async (request: Request, response: Response) => {
         response.status(401).json(result);
     }
 
-    console.log(result)
-
     response.status(201).json(result);
 });
 
@@ -70,6 +81,63 @@ salonRoutes.delete("/team/:id", async (request: Request, response: Response) => 
     const deleteTeamController = new DeleteTeamController(deleteTeamUseCase);
     
     const result = await deleteTeamController.handle(id);
+
+    response.status(204).json(result);
+});
+
+/* Players */
+
+salonRoutes.get("/player", async (request: Request, response: Response) => {    
+    const fetchPlayersUseCase = new FetchPlayersUseCase(postgresPlayerRepository);
+    const fetchPlayersController = new FetchPlayersController(fetchPlayersUseCase);
+    
+    const result = await fetchPlayersController.handle();
+    
+    response.status(200).json(result);
+});
+
+salonRoutes.get("/player/:id", async (request: Request, response: Response) => {
+    const { id } = request.params;
+    
+    const getPlayerByIdUseCase = new GetPlayerByIdUseCase(postgresPlayerRepository);
+    const getPlayerByIdController = new GetPlayerByIdController(getPlayerByIdUseCase);
+    
+    const result = await getPlayerByIdController.handle(id);
+    
+    response.status(200).json(result);
+});
+    
+salonRoutes.put("/player/:id", async (request: Request, response: Response) => {
+    const { id } = request.params;
+    
+    const updatePlayerUseCase = new UpdatePlayerUseCase(postgresPlayerRepository);
+    const updatePlayerController = new UpdatePlayerController(updatePlayerUseCase);
+    
+    const result = await updatePlayerController.handle(id, request.body);
+    
+    response.status(200).json(result);
+});
+        
+salonRoutes.post("/player", async (request: Request, response: Response) => {
+    const createPlayerUseCase = new CreatePlayerUseCase(postgresPlayerRepository);
+    const createPlayerController = new CreatePlayerController(createPlayerUseCase);
+
+    const result = await createPlayerController.handle(request.body);
+
+    if(!result){
+        response.status(401).json(result);
+    }
+
+    response.status(201).json(result);
+});
+
+salonRoutes.delete("/player/:id", async (request: Request, response: Response) => {
+    const { id } = request.params;
+
+    const deletePlayerUseCase = new DeletePlayerUseCase(postgresPlayerRepository);
+    const deletePlayerController = new DeletePlayerController(deletePlayerUseCase);
+    
+    const result = await deletePlayerController.handle(id);
 
     response.status(204).json(result);
 });

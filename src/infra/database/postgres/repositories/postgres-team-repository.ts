@@ -12,7 +12,11 @@ export class PostgresTeamRepository implements TeamRepository{
     }
 
     async findMany(): Promise<Team[]> {
-        throw new Error("Method not implemented.");
+        const data = await this.postgres.query(`SELECT *FROM teams`);
+
+        const teams: Team[] = data.rows;
+
+        return teams;
     }
 
     async create(team: Team): Promise<Team> {

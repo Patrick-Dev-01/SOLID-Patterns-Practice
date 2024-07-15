@@ -17,4 +17,13 @@ describe("Fetch Teams (e2e)", async () => {
 
         expect(response.body.teams.length).toBeGreaterThan(0);
     });
+
+    it("should Fetch salon teams", async () => {
+        await teamFactory.makePostgresTeam({})
+        await teamFactory.makePostgresTeam({})
+
+        const response = await request(app).get("/salon/team").send();
+
+        expect(response.body.teams.length).toBeGreaterThan(0);
+    });
 });

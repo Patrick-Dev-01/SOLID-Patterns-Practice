@@ -9,7 +9,7 @@ export class MySQLService{
             host: env.MYSQL_HOST,
             user: env.MYSQL_USER,
             password: env.MYSQL_PASSWORD,
-            database: env.NODE_ENV !== 'test' ? env.MYSQL_DATABASE : 'test',       
+            database: env.NODE_ENV === 'test' ? 'test' : env.MYSQL_DATABASE,       
         });
     }
 

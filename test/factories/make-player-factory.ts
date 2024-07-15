@@ -1,6 +1,7 @@
 import { faker } from "@faker-js/faker";
 import { Player } from "../../src/core/types/player-types";
 import { MySQLService } from "../../src/infra/database/mysql/mysql";
+import { PostgresSQLService } from "../../src/infra/database/postgres/postgres";
 
 enum Position {
     goleiro = "goleiro",
@@ -28,6 +29,7 @@ export function makePlayer({ id, name, position, shirt_number, starter, team_id 
 
 export class PlayerFactory{
     private mysql = new MySQLService();
+    private postgres = new PostgresSQLService();
 
     async makeMySQLPlayer(data: Partial<Player>): Promise<Player>{
         const player = makePlayer(data);
@@ -35,6 +37,18 @@ export class PlayerFactory{
         await this.mysql.query(`
             INSERT INTO players (id, name, shirt_number, position, starter, team_id ) 
             VALUES ('${player.id}', "${player.name}", ${player.shirt_number}, '${player.position}', 
+            ${player.starter}, '${player.team_id}')`
+        );
+
+        return player;
+    }
+
+    async makePostgresPlayer(data: Partial<Player>): Promise<Player>{
+        const player = makePlayer(data);
+
+        await this.postgres.query(`
+            INSERT INTO players (id, name, shirt_number, position, starter, team_id ) 
+            VALUES ('${player.id}', '${player.name}', ${player.shirt_number}, '${player.position}', 
             ${player.starter}, '${player.team_id}')`
         );
 

@@ -9,7 +9,7 @@ export class PostgresSQLService{
             host: env.POSTGRES_HOST,
             user: env.POSTGRES_USER,
             password: env.POSTGRES_PASSWORD,
-            database: env.POSTGRES_DB
+            database: env.NODE_ENV === 'test' ? 'test' : env.POSTGRES_DB,   
         });
 
         this.postgres.connect();
@@ -19,7 +19,7 @@ export class PostgresSQLService{
         try {
             const result = await this.postgres.query(query);
             
-            return result as unknown;
+            return result as any;
         } catch(error) {
             console.error(error)
         }
