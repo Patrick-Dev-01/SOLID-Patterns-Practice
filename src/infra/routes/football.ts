@@ -36,9 +36,11 @@ import { DeleteCoachUseCase } from '../../app/use-cases/delete-coach';
 import { DeleteCoachController } from '../http/controllers/delete-coach-controller';
 import { FetchCoachsUseCase } from '../../app/use-cases/fetch-coachs';
 import { FetchCoachsController } from '../http/controllers/fetch-coachs-controller';
+import { validateData } from '../http/middleware/zod';
 
 const footballRoutes = express.Router();
 
+// interface
 const mySQLTeamRepository = new MySQLTeamRepository();
 const mySQLPlayerRepository = new MySQLPlayerRepository();
 const mySQLCoachRepository = new MySQLCoachRepository(); 
@@ -46,7 +48,9 @@ const mySQLCoachRepository = new MySQLCoachRepository();
 /* Teams */
 
 footballRoutes.get("/team", async (request: Request, response: Response) => {
+    // serviço
     const fetchTeamsUseCase = new FetchTeamsUseCase(mySQLTeamRepository);
+    // controller
     const fetchTeamsController = new FetchTeamsController(fetchTeamsUseCase);
 
     const result = await fetchTeamsController.handle();

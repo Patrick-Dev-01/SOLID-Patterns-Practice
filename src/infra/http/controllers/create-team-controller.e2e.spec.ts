@@ -10,4 +10,12 @@ describe("Create Team (e2e)", async () => {
 
         expect(response.status).toBe(201);
     });
+
+    it("Should create a salon football team", async () => {
+        const response = await request(app).post(`/salon/team`).send(
+            makeTeam({})
+        );
+
+        expect(response.status).toBe(201);
+    })
 });

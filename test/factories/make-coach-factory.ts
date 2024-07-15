@@ -18,7 +18,7 @@ export class CoachFactory{
     async makeMySQLCoach(data: Partial<Coach>){
         const coach = makeCoach(data);
 
-        await this.mysql.query(`INSERT INTO coachs (id, name) VALUES ('${coach.id}', '${coach.name}')`);
+        await this.mysql.query(`INSERT INTO coachs (id, name) VALUES ('${coach.id}', "${coach.name}")`);
 
         return coach;
     }

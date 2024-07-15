@@ -22,7 +22,7 @@ export class CreateTeamUseCase{
         }
 
         await this.teamRepository.create(team);
-
+        
         return { team }
     }
 }

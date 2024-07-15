@@ -8,7 +8,8 @@ const envSchema = z.object({
     MYSQL_USER: z.string(),
     MYSQL_PASSWORD: z.string(),
     MYSQL_PORT: z.string(),
-    MYSQL_DATABASE: z.string(), 
+    MYSQL_DATABASE: z.string(),
+    POSTGRES_HOST: z.string(), 
     POSTGRES_USER: z.string(),
     POSTGRES_PASSWORD: z.string(),
     POSTGRES_DB: z.string()

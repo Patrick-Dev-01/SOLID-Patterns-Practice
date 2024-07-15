@@ -21,4 +21,17 @@ describe("Update Team (e2e)", async () => {
             expect.objectContaining({ name: "Palmeiras SE" })
         );
     });
+
+    it("should update salon football team", async () => {
+        const team = await teamFactory.makePostgresTeam({});
+
+        const response = await request(app).put(`/salon/team/${team.id}`).send({
+            name: 'Santos FC'
+        }); 
+
+        expect(response.status).toEqual(200);
+        expect(response.body.team).toEqual(
+            expect.objectContaining({ name: "Santos FC" })
+        );
+    });
 });

@@ -1,7 +1,7 @@
 import { CreateTeamUseCase } from "../../../app/use-cases/create-team";
-import { z } from 'zod';
+import { ZodError, z } from 'zod';
 
-const createTeamBodySchema = z.object({
+export const createTeamBodySchema = z.object({
     name: z.string().min(1, "Nome do time obrigatório"),
 });
 
@@ -22,7 +22,12 @@ export class CreateTeamController{
         } 
         
         catch (err) {
-            console.log(err);
+            if (err instanceof ZodError) {
+                const errorMessages = err.errors.map((issue: any) => ({
+                      message: `${issue.message}`,
+                  }))
+                } else {
+            }
         }
     }
 }

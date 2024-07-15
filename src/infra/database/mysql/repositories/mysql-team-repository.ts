@@ -26,7 +26,7 @@ export class MySQLTeamRepository implements TeamRepository{
     }
 
     async update(team: Team) {
-        await this.mysql.query(`UPDATE teams SET name = '${team.name}' WHERE id = '${team.id}'`) as Team;
+        await this.mysql.query(`UPDATE teams SET name = "${team.name}" WHERE id = '${team.id}'`) as Team;
 
         return team;
     }

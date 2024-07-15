@@ -17,9 +17,18 @@ export class MySQLService{
         return new Promise((resolve, reject) => {
             this.mysql.query(query, (err, data) => {
                 if(err) reject(err);
-                    
                 resolve(data as unknown);
             });
         });
+    }
+
+    async flushDatabase(){
+        if(env.NODE_ENV === 'test'){
+            await this.query('SET FOREIGN_KEY_CHECKS = 0;');
+            await this.query('TRUNCATE table coachs');
+            await this.query('TRUNCATE table teams');
+            await this.query('TRUNCATE table players');
+            await this.query('SET FOREIGN_KEY_CHECKS = 1;');
+        }
     }
 }

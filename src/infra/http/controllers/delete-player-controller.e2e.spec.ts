@@ -2,7 +2,7 @@ import request from 'supertest';
 import { app } from '../../../app';
 import { PlayerFactory } from '../../../../test/factories/make-player-factory';
 
-describe("Delete Team (e2e)", async () => {
+describe("Delete Player (e2e)", async () => {
     let playerFactory: PlayerFactory;
 
     beforeAll(() => {

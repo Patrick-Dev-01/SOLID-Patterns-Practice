@@ -8,12 +8,15 @@ enum Position {
     volante = "volante",
     meio_campo = "meio campo",
     atacante = "atacante",
+    pivo = "pivô",
+    ala = "Ala",
+    fixo = "fixo"
 }
 
 export function makePlayer({ id, name, position, shirt_number, starter, team_id }: Partial<Player>){
     const player: Player = {
         id: id ?? faker.string.uuid(),
-        name: name ?? faker.person.fullName(),
+        name: name ?? faker.person.fullName().replace("'", ""),
         position: position ?? faker.helpers.enumValue(Position),
         shirt_number: shirt_number ?? faker.number.int(100),
         starter: starter ?? faker.datatype.boolean(),
@@ -31,7 +34,7 @@ export class PlayerFactory{
 
         await this.mysql.query(`
             INSERT INTO players (id, name, shirt_number, position, starter, team_id ) 
-            VALUES ('${player.id}', '${player.name}', ${player.shirt_number}, '${player.position}', 
+            VALUES ('${player.id}', "${player.name}", ${player.shirt_number}, '${player.position}', 
             ${player.starter}, '${player.team_id}')`
         );
 
