@@ -16,4 +16,12 @@ describe("Delete Coach (e2e)", async () => {
 
         expect(response.status).toEqual(204);
     });
+
+    it("should Delete a salon coach", async () => {
+        const coach = await coachFactory.makePostgresCoach({});
+
+        const response = await request(app).delete(`/salon/coach/${coach.id}`).send(); 
+
+        expect(response.status).toEqual(204);
+    });
 });

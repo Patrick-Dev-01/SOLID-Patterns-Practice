@@ -22,4 +22,18 @@ describe("Update Coach (e2e)", async () => {
             expect.objectContaining({ name: 'New Name', team_id: '2'})
         );
     });
+
+    it("should Update salon coach", async () => {
+        const coach = await coachFactory.makePostgresCoach({});
+
+        const response = await request(app).put(`/salon/coach/${coach.id}`).send({
+            name: 'New Name',
+            team_id: '2'
+        }); 
+
+        expect(response.status).toEqual(200);
+        expect(response.body.coach).toEqual(
+            expect.objectContaining({ name: 'New Name', team_id: '2'})
+        );
+    });
 });

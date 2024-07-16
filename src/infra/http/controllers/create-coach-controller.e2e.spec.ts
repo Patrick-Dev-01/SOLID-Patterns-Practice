@@ -10,4 +10,12 @@ describe("Create Coach (e2e)", async () => {
 
         expect(response.status).toBe(201);
     });
+
+    it("should create a salon coach", async () => {
+        const response = await request(app).post(`/salon/coach`).send(
+            makeCoach({})
+        );
+
+        expect(response.status).toBe(201);
+    });
 });

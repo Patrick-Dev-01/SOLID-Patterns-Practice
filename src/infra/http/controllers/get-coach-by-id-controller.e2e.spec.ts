@@ -18,4 +18,14 @@ describe("Get Coach by id (e2e)", async () => {
             expect.objectContaining({ id: coach.id })
         );
     });
+
+    it("Should get a salon Coach by id", async () => {
+        const coach = await coachFactory.makePostgresCoach({});
+
+        const response = await request(app).get(`/salon/coach/${coach.id}`).send();
+
+        expect(response.body.coach).toEqual(
+            expect.objectContaining({ id: coach.id })
+        );
+    });
 });

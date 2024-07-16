@@ -164,7 +164,7 @@ footballRoutes.delete("/player/:id", async (request: Request, response: Response
 /* Coaches */
 
 footballRoutes.get("/coach", async (request: Request, response: Response) => {    
-    const fetchCoachsUseCase = new FetchCoachsUseCase(mySQLPlayerRepository);
+    const fetchCoachsUseCase = new FetchCoachsUseCase(mySQLCoachRepository);
     const fetchCoachsController = new FetchCoachsController(fetchCoachsUseCase);
     
     const result = await fetchCoachsController.handle();

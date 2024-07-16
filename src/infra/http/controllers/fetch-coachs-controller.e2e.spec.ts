@@ -17,4 +17,13 @@ describe("Fetch Coachs (e2e)", async () => {
 
         expect(response.body.coachs.length).toBeGreaterThan(0);
     });
+
+    it("should Fetch salon coachs", async () => {
+        await coachFactory.makePostgresCoach({});
+        await coachFactory.makePostgresCoach({});
+
+        const response = await request(app).get("/salon/coach").send();
+
+        expect(response.body.coachs.length).toBeGreaterThan(0);
+    });
 });
